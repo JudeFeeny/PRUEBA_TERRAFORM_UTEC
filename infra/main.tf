@@ -33,6 +33,14 @@ resource "aws_security_group" "default" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  tags = merge(var.tags, {
+    Name = "ec2-lmelgarejo-utec-sg"
+  })
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # Instancia EC2
