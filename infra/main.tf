@@ -6,6 +6,7 @@ terraform {
   }
 }
 
+# Repositorios ECR
 module "ecr_repo" {
   source          = "git::https://github.com/JudeFeeny/MODULE_ECR_AWS.git?ref=main"
   ecr_name         = var.ecr_names
@@ -13,6 +14,7 @@ module "ecr_repo" {
   image_mutability = "IMMUTABLE"
 }
 
+# Security group para la instancia EC2
 resource "aws_security_group" "default" {
   name        = "ec2-lmelgarejo-utec"
   description = "Default security group for EC2"
@@ -33,6 +35,7 @@ resource "aws_security_group" "default" {
   }
 }
 
+# Instancia EC2
 module "ec2" {
   source          = "git::https://github.com/JudeFeeny/MODULE_EC2_AWS.git?ref=main"
   ami                = "ami-0c02fb55956c7d316"
@@ -46,6 +49,7 @@ module "ec2" {
   }
 }
 
+# Cluster EKS
 module "eks" {
   source          = "git::https://github.com/JudeFeeny/MODULE_EKS_AWS.git?ref=main"
 
